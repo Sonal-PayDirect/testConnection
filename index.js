@@ -1,6 +1,8 @@
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
+console.log('Starting the database connection process...');
+
 const sequelize = new Sequelize(process.env.DB_NAME, null, null, {
     host: process.env.DB_HOST,
     dialect: 'mssql',
@@ -18,17 +20,22 @@ const sequelize = new Sequelize(process.env.DB_NAME, null, null, {
         }
       }
     }
-  });  
+});
 
 async function testConnection() {
+  console.log('Attempting to authenticate the database connection...');
+
   try {
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   } finally {
+    console.log('Closing the database connection...');
     await sequelize.close();
+    console.log('Database connection closed.');
   }
 }
 
+console.log('Starting the test connection function...');
 testConnection();
