@@ -1,39 +1,17 @@
-const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
-const sequelize = new Sequelize(process.env.DB_NAME, null, null, {
-    host: process.env.DB_HOST,
-    dialect: 'mssql',
-    dialectOptions: {
-        options: {
-            encrypt: true,
-            trustServerCertificate: true
-        },
-        authentication: {
-            type: 'ntlm',
-            options: {
-                domain: process.env.DB_DOMAIN,
-                userName: process.env.DB_USER,
-                password: process.env.DB_PASSWORD
-            }
-        }
-    }
-});  
-
 async function testConnection() {
-    console.log('Starting the connection test...');
+    console.log('Starting the test...');
 
     try {
-        // Simulating connection attempt
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        console.log('Connection has been established successfully!');
+        // Simulated process (no actual connection)
+        console.log('Simulating a process...');
     } catch (error) {
-        console.error('Unable to connect to the database:', error);
+        console.error('An error occurred:', error);
     } finally {
-        console.log('Connection test completed.');
-        await sequelize.close();
+        console.log('Test completed.');
     }
 }
 
-console.log('Running connection test...');
+console.log('Running the test...');
 testConnection();
